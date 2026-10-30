@@ -1,9 +1,4 @@
-MI CALCULADORA SHEIN — INSTALACIÓN EN SAMSUNG
-
-1. Extrae este ZIP.
-2. Sube los archivos (index.html, sw.js, manifest.webmanifest, icon.svg y los PNG) a un alojamiento HTTPS que sirva archivos estáticos, todos en la misma carpeta.
-3. Abre la URL HTTPS en Chrome en tu Samsung.
-4. Menú de tres puntos > Añadir a pantalla de inicio > Instalar (si aparece).
-5. Abre la app con internet una vez; después podrás calcular sin conexión.
-
-IMPORTANTE: no abras index.html directamente desde el administrador de archivos: eso no permite instalar la app web ni activar correctamente el modo sin conexión. La consulta automática de precios SHEIN no está garantizada. Haz copias de seguridad de tus productos.
+PinkCalc - Inventario, ventas, váuchers imprimibles y créditos con abonos fechados.
+ANTES DE ACTUALIZAR: Abrí la app actual > Resumen > Exportar respaldo. No desinstalés la app.
+Subí estos archivos al mismo repositorio GitHub Pages reemplazando los anteriores. Esperá a que publique y volvé a abrir la app.
+Datos almacenados localmente en el dispositivo: conservá respaldos frecuentes. Los costos y ganancias no se incluyen en los comprobantes.

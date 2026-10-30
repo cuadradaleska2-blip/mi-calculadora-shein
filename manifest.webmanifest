@@ -1,6 +1,6 @@
 {
-  "name": "Mi Calculadora SHEIN",
-  "short_name": "Calculadora SHEIN",
+  "name": "PinkCalc",
+  "short_name": "PinkCalc",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fff8fb",

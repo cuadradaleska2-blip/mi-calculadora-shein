@@ -1,4 +1,4 @@
-PinkCalc - Inventario, ventas, váuchers imprimibles y créditos con abonos fechados.
-ANTES DE ACTUALIZAR: Abrí la app actual > Resumen > Exportar respaldo. No desinstalés la app.
-Subí estos archivos al mismo repositorio GitHub Pages reemplazando los anteriores. Esperá a que publique y volvé a abrir la app.
-Datos almacenados localmente en el dispositivo: conservá respaldos frecuentes. Los costos y ganancias no se incluyen en los comprobantes.
+PinkCalc - Cuentas por cliente, compras detalladas, abonos ilimitados por fecha y váuchers imprimibles.
+Subí los siete archivos EXTRAÍDOS al repositorio de GitHub Pages.
+Antes de actualizar, exportá un respaldo desde Resumen.
+La sección Mis clientes usa una nueva cuenta única por cliente. Los registros anteriores quedan disponibles en Pedidos anteriores y Créditos. No se fusionan automáticamente para evitar duplicados.

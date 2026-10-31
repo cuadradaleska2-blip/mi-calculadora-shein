@@ -1,4 +1,9 @@
-PinkCalc - Cuentas por cliente, compras detalladas, abonos ilimitados por fecha y váuchers imprimibles.
-Subí los siete archivos EXTRAÍDOS al repositorio de GitHub Pages.
-Antes de actualizar, exportá un respaldo desde Resumen.
-La sección Mis clientes usa una nueva cuenta única por cliente. Los registros anteriores quedan disponibles en Pedidos anteriores y Créditos. No se fusionan automáticamente para evitar duplicados.
+PINKCALC NUEVA VERSION - 31/10/2026
+
+1. ANTES DE ACTUALIZAR: Abrí tu PinkCalc instalada y exportá un respaldo. Guardalo fuera de la app.
+2. Extraé este ZIP. En GitHub, repositorio mi-calculadora-shein, subí TODOS los archivos sueltos (no el ZIP), confirmá cambios.
+3. No desinstalés PinkCalc ni borres datos del navegador. Esperá la publicación de GitHub Pages y abrí tu app instalada.
+4. CATÁLOGO: desde PinkCalc > Catálogo digital, seleccioná productos y descargá catalogo.json. Subí ese nuevo catalogo.json al repositorio reemplazando el de ejemplo. Compartí https://cuadradaleska2-blip.github.io/mi-calculadora-shein/catalogo.html
+5. Cada vez que cambiés los productos publicados, descargá y volvé a subir catalogo.json. Los pedidos se reciben por WhatsApp; no se sincronizan automáticamente en la app.
+6. La pulpería mantiene inventario, ventas y fiados en el dispositivo. Exportá respaldos periódicamente.
+7. Este paquete es una actualización de la versión de cuentas y abonos ilimitados.

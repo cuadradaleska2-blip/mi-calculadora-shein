@@ -1,0 +1,28 @@
+PINKCALC - ACTUALIZACION DE PRODUCTOS A CLIENTES Y FACTURAS ROSADITAS
+
+IMPORTANTE: antes de actualizar, desde PinkCalc descargue el respaldo JSON en Resumen > Exportar respaldo. No desinstale la app ni borre datos.
+
+1. Descomprima este ZIP.
+2. Entre al repositorio https://github.com/cuadradaleska2-blip/mi-calculadora-shein
+3. Suba estos dos archivos en la raiz del repositorio usando Add file > Upload files:
+   - pinkcalc-pedidos.js
+   - sw.js (reemplaza el anterior)
+4. En GitHub abra index.html y toque Editar (lapiz).
+5. Justo ANTES de la linea final </body></html>, pegue esta linea:
+   <script src="./pinkcalc-pedidos.js"></script>
+   Debe quedar al final DESPUES del antiguo </script> y ANTES de </body>.
+6. Guarde usando Commit changes.
+7. Abra PinkCalc en el navegador, actualice y pruebe con un cliente de prueba y productos guardados.
+
+FUNCIONES:
+- Boton Agregar a cliente en Mis productos guardados.
+- Carrito con tantos productos como necesite y cantidades/precios editables.
+- Cliente existente o nuevo, abono inicial opcional (incluido 0), metodo de pago.
+- Al guardar, se anade una compra a la cuenta ya existente del cliente.
+- Facturas rosadas con foto por producto, decoracion de muneca/capibara, total/abonos/saldo.
+- Varias paginas de factura cuando hay muchos productos, compartir o imprimir.
+- Sigue funcionando la cuenta y los abonos anteriores.
+
+NOTAS:
+No se reemplazan ni borran claves de localStorage existentes. Las facturas son generadas a partir de los datos guardados en el dispositivo. El modulo usa dibujos vectoriales originales; el personaje es una aproximacion al modelo visual mostrado, no copia exacta de aquella ilustracion.
+No probado todavia dentro del telefono; haga respaldo antes de publicar.

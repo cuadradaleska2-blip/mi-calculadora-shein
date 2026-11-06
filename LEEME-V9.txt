@@ -1,0 +1,16 @@
+PINKCALC V9 - FACTURA CON EL DISEÑO ORIGINAL
+
+Archivos para subir a GitHub (extraé el ZIP primero):
+- pinkcalc-pedidos.js (reemplazar)
+- sw.js (reemplazar)
+- pinkcalc-factura-plantilla.jpg (nuevo archivo)
+
+No subas este LEEME ni el ZIP como archivo suelto.
+No edites index.html.
+
+ANTES: Abrí PinkCalc y exportá un respaldo JSON.
+DESPUÉS: En GitHub > Add file > Upload files, subí los tres archivos y guardá con Commit changes. Abrí PinkCalc con internet, cerrá y abrí de nuevo; puede requerir dos aperturas para actualizar el servicio sin conexión.
+
+La factura usa los dibujos y el diseño de la imagen original como plantilla; los campos de cliente, fecha, productos, cantidades, pagos y saldo son dinámicos. Si hay más de tres productos, genera varias páginas. No muestra costos ni ganancias.
+
+No desinstales PinkCalc ni borres datos del navegador.

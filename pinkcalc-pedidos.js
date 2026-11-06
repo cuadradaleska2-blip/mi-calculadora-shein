@@ -41,10 +41,54 @@ round(g,46,6,27,20,10,'#ff6da5');round(g,76,6,27,20,10,'#ff6da5');round(g,68,10,
 round(g,235,143,100,53,25,'#b87c58');round(g,265,114,64,54,22,'#c58c64');g.fillStyle='#976041';g.beginPath();g.arc(278,113,10,0,7);g.arc(315,117,9,0,7);g.fill();g.fillStyle='#44322c';g.beginPath();g.arc(309,137,3,0,7);g.fill();g.restore()}
 function getPic(src){return new Promise(resolve=>{if(!src)return resolve(null);const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>resolve(null);i.src=src})}
 function textWrap(g,s,x,y,width,lineH,maxLines){let words=String(s).split(/\s+/),lines=[],line='';for(let w of words){let next=line?line+' '+w:w;if(g.measureText(next).width>width&&line){lines.push(line);line=w}else line=next}if(line)lines.push(line);lines.slice(0,maxLines).forEach((v,i)=>g.fillText(v,x,y+i*lineH));return Math.min(lines.length,maxLines)}
-async function invoices(a,p){let perPage=7,total=p.items.reduce((n,i)=>n+i.qty*i.price,0);let left=accountPaymentAlloc(a).find(x=>x.id===p.id)?.left??total,paid=Math.max(0,total-left),pages=[];for(let start=0;start<p.items.length;start+=perPage){let sub=p.items.slice(start,start+perPage),last=start+perPage>=p.items.length,page=Math.floor(start/perPage)+1,max=Math.ceil(p.items.length/perPage);let canvas=document.createElement('canvas');canvas.width=900;canvas.height=1480;let g=canvas.getContext('2d');g.fillStyle='#fffafc';g.fillRect(0,0,900,1480);round(g,24,22,852,1435,26,'#ffffff');round(g,24,22,852,225,26,'#f9c6dc');round(g,24,195,852,52,0,'#f9c6dc');g.fillStyle='#8f315b';g.textAlign='center';g.font='bold 74px system-ui';g.fillText('PinkCalc',450,111);g.font='26px system-ui';g.fillText('Calculá fácil. Vendé mejor. 💗',450,164);g.textAlign='left';g.fillStyle='#842f57';g.font='bold 32px system-ui';g.fillText('FACTURA DE COMPRA',62,304);g.font='22px system-ui';g.fillText('N.º '+String(p.id).slice(0,14),62,345);g.textAlign='right';g.fillText('Página '+page+' de '+max,837,345);round(g,53,380,792,90,15,'#fff0f6');g.textAlign='left';g.fillStyle='#723c55';g.font='bold 26px system-ui';g.fillText('Cliente: '+a.name.slice(0,28),72,417);g.font='21px system-ui';let methods=a.payments.filter(v=>v.purchaseId===p.id&&v.note&&v.note.includes('Método: ')).map(v=>v.note.match(/Método: ([^·]+)/)?.[1]?.trim()).filter(Boolean);let displayMethod=methods[methods.length-1]||p.paymentMethod||'Por confirmar';g.fillText('Fecha: '+p.date+'  ·  Pago: '+displayMethod.slice(0,25),72,450);
-g.font='bold 23px system-ui';g.fillStyle='#a04671';g.fillText('PRODUCTO',70,519);g.textAlign='right';g.fillText('TOTAL',814,519);g.textAlign='left';let y=542;for(let item of sub){round(g,55,y,790,112,12,'#fff7fa');let img=await getPic(item.photo);if(img){g.save();g.beginPath();g.roundRect(65,y+10,96,92,9);g.clip();let scale=Math.max(96/img.width,92/img.height),w=img.width*scale,h=img.height*scale;g.drawImage(img,65+(96-w)/2,y+10+(92-h)/2,w,h);g.restore()}else{round(g,65,y+10,96,92,10,'#f8d7e5');g.font='42px system-ui';g.fillText('🛍️',88,y+70)}g.fillStyle='#6a344f';g.font='bold 22px system-ui';g.textAlign='left';textWrap(g,item.name,177,y+35,410,27,2);g.font='19px system-ui';g.fillText(item.qty+' × '+fmt(item.price),177,y+93);g.font='bold 21px system-ui';g.textAlign='right';g.fillText(fmt(item.qty*item.price),818,y+63);g.textAlign='left';y+=119}
-if(last){round(g,55,1030,790,157,15,'#fff0f6');g.fillStyle='#783b55';g.font='23px system-ui';g.fillText('Total del pedido',77,1070);g.textAlign='right';g.fillText(fmt(total),820,1070);g.textAlign='left';g.fillText('Abonado',77,1110);g.textAlign='right';g.fillText(fmt(paid),820,1110);g.textAlign='left';g.font='bold 27px system-ui';g.fillText(left<.005?'PAGADO':'Saldo pendiente',77,1155);g.textAlign='right';g.fillText(fmt(left),820,1155)}else{g.fillStyle='#9f547a';g.textAlign='center';g.font='22px system-ui';g.fillText('Continúa en la página siguiente…',450,1140)}
-round(g,53,1237,792,175,20,'#ffe4ef');mascot(g,64,1216);g.textAlign='right';g.fillStyle='#8f315b';g.font='bold 24px system-ui';g.fillText('¡Gracias por tu compra!',828,1297);g.font='19px system-ui';g.fillText('Con cariño, PinkCalc 💗',828,1334);pages.push(canvas)}return pages}
+async function invoices(a,p){
+ const perPage=3,total=p.items.reduce((n,i)=>n+i.qty*i.price,0);
+ const left=accountPaymentAlloc(a).find(x=>x.id===p.id)?.left??total;
+ const paid=Math.max(0,total-left),pages=[];
+ const bg=await getPic('./pinkcalc-factura-plantilla.jpg');
+ if(!bg)throw Error('No se cargó la plantilla ilustrada de PinkCalc.');
+ const method=a.payments.filter(v=>v.purchaseId===p.id&&v.note?.includes('Método: ')).map(v=>v.note.match(/Método: ([^·]+)/)?.[1]?.trim()).filter(Boolean).pop()||p.paymentMethod||'Por confirmar';
+ const date=new Date(p.date+'T12:00:00').toLocaleDateString('es-NI',{day:'2-digit',month:'long',year:'numeric'});
+ const max=Math.max(1,Math.ceil(p.items.length/perPage));
+ for(let page=0;page<max;page++){
+  const sub=p.items.slice(page*perPage,(page+1)*perPage),last=page===max-1;
+  let c=document.createElement('canvas');c.width=1024;c.height=1536;let g=c.getContext('2d');g.drawImage(bg,0,0,1024,1536);
+  const box=(x,y,w,h,fill='#fff2f8',stroke='#d95192',r=20)=>{g.beginPath();g.roundRect(x,y,w,h,r);g.fillStyle=fill;g.fill();g.strokeStyle=stroke;g.lineWidth=2;g.stroke()};
+  const tx=(s,x,y,size=25,bold=false,color='#67213f',align='left')=>{g.fillStyle=color;g.textAlign=align;g.font=(bold?'bold ':'')+size+'px sans-serif';g.fillText(String(s),x,y)};
+  // El encabezado, la muñequita, las bolsas y el capibara son los de la imagen elegida.
+  box(735,254,252,57,'#fff8fc','#d51a7a',18);tx('N.º '+String(p.id).replace(/\D/g,'').slice(-6).padStart(6,'0'),862,292,28,true,'#9d004e','center');
+  box(31,333,635,105);box(680,333,310,105,'#ffe1ed');
+  tx('Cliente:',65,375,26,true);tx(a.name.slice(0,33),195,375,25,true);
+  tx('Fecha:',65,413,24,true);tx(date,166,413,23);
+  tx('Estado:',711,371,25,true);tx(left<.005?'PAGADO':paid>0?'ABONANDO':'PENDIENTE',710,412,24,true,left<.005?'#26845c':'#cc5a18');
+  box(31,460,960,329,'#fffafc','#e43d94');
+  g.fillStyle='#e9348d';g.fillRect(33,462,956,51);
+  tx('Producto',175,498,27,true,'white');tx('Cant.',554,498,25,true,'white');tx('Precio Unit.',690,498,24,true,'white');tx('Subtotal',945,498,24,true,'white','right');
+  for(let j=0;j<sub.length;j++){
+   let item=sub[j],y=515+j*90;
+   if(j%2===0){g.fillStyle='#fff0f7';g.fillRect(34,y,954,89)}
+   let pic=await getPic(item.photo);
+   if(pic){g.save();g.beginPath();g.roundRect(53,y+8,92,74,12);g.clip();let k=Math.max(92/pic.width,74/pic.height);g.drawImage(pic,53+(92-pic.width*k)/2,y+8+(74-pic.height*k)/2,pic.width*k,pic.height*k);g.restore()}
+   else {tx('🛍️',82,y+55,37)}
+   g.textAlign='left';g.font='bold 21px sans-serif';g.fillStyle='#43162d';textWrap(g,item.name,163,y+36,315,25,2);
+   tx(item.qty,558,y+52,24,true,'#43162d','center');tx(fmt(item.price),775,y+52,22,false,'#43162d','right');tx(fmt(item.qty*item.price),965,y+52,22,true,'#43162d','right');
+   g.strokeStyle='#edb6d0';g.beginPath();g.moveTo(40,y+89);g.lineTo(982,y+89);g.stroke();
+  }
+  if(max>1)tx('Página '+(page+1)+' de '+max,505,819,21,true,'#b51b67','center');
+  box(31,843,500,210,'#fff0f7');box(550,843,441,210,'#fff0f7');
+  tx('Resumen del pedido',60,882,28,true,'#a30054');
+  tx('Total de productos:',60,922,23);tx(p.items.reduce((n,i)=>n+i.qty,0),505,922,23,true,'#62233e','right');
+  tx('Subtotal:',60,958,23);tx(fmt(total),505,958,23,true,'#62233e','right');
+  tx('Abono:',60,994,23);tx(fmt(paid),505,994,23,true,'#62233e','right');
+  box(44,1005,475,42,'#ffd1e7','#ffd1e7',15);tx('Saldo pendiente:',60,1035,25,true,'#a30054');tx(fmt(left),504,1035,25,true,'#a30054','right');
+  tx('Método de pago',574,882,28,true,'#a30054');
+  ['Efectivo','Transferencia','Depósito','Otro'].forEach((m,i)=>{let y=923+i*33;box(579,y-20,22,22,'#fff','#bf4381',4);if(method.toLowerCase().includes(m.toLowerCase())||(i===3&&!['Efectivo','Transferencia','Depósito'].some(x=>method.toLowerCase().includes(x.toLowerCase()))))tx('✓',581,y-2,22,true,'#d70075');tx(m,617,y,22)});
+  box(33,1090,399,195,'#fff1f7');tx('Nota:',65,1132,27,true,'#a30054');
+  tx(last?'Gracias por tu compra.':'Tu pedido continúa',62,1181,23,true);tx(last?'Tu pedido está registrado':'en la siguiente página.',62,1219,22);tx(last?'y en proceso. 💗':'PinkCalc 💗',62,1256,22);
+  pages.push(c);
+ }
+ return pages;
+}
 async function shareInvoices(a,p,print){let cvs=await invoices(a,p),files=[];for(let i=0;i<cvs.length;i++){let blob=await new Promise(r=>cvs[i].toBlob(r,'image/png'));if(blob)files.push(new File([blob],'PinkCalc-'+String(p.id).slice(0,8)+'-pagina-'+(i+1)+'.png',{type:'image/png'}))}if(!files.length)return alert('No se pudo generar la factura.');if(print){let w=window.open('','_blank');if(!w)return alert('Permití ventanas emergentes para imprimir.');w.document.write('<!doctype html><html><head><meta name="viewport" content="width=device-width"><title>Factura PinkCalc</title><style>body{margin:0;text-align:center}img{display:block;max-width:100%;width:100%;page-break-after:always}@page{margin:5mm}</style></head><body>'+cvs.map(c=>'<img src="'+c.toDataURL('image/png')+'">').join('')+'<script>window.onload=()=>window.print()<\/script></body></html>');w.document.close();return}
 try{if(navigator.canShare?.({files})&&navigator.share){await navigator.share({files,title:'Factura PinkCalc de '+a.name});return}}catch(err){if(err.name==='AbortError')return}
 for(let f of files){let url=URL.createObjectURL(f),link=document.createElement('a');link.href=url;link.download=f.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),15000)}alert('Factura descargada en '+files.length+' imagen(es). Podés enviarlas por WhatsApp.')}

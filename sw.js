@@ -1,7 +1,7 @@
-/* PinkCalc V8.1 - correccion: inyectar modulo fuera del JavaScript original.
-   No modifica ni elimina los datos guardados del usuario. */
-const CACHE='pinkcalc-v8-1-correccion-20261105';
-const FILES=['./','./index.html','./pinkcalc-pedidos.js','./catalogo.html','./catalogo.json','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
+/* PinkCalc V8: incorpora el modulo de facturas sin editar index.html.
+   Mantiene los datos existentes del navegador. */
+const CACHE='pinkcalc-v9-factura-identica-20261105';
+const FILES=['./','./index.html','./pinkcalc-pedidos.js','./pinkcalc-factura-plantilla.jpg','./catalogo.html','./catalogo.json','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()])));
 async function pageWithPinkCalc(request){
@@ -13,11 +13,8 @@ async function pageWithPinkCalc(request){
  if(!type.includes('text/html'))return response;
  let html=await response.text();
  const tag='<script src="./pinkcalc-pedidos.js"></script>';
- if(!html.includes('src="./pinkcalc-pedidos.js"')){
-   // Importante: usar la ULTIMA etiqueta de cierre. Dentro de index.html
-   // tambien hay texto '</body>' dentro de cadenas JavaScript.
-   const pos=html.toLowerCase().lastIndexOf('</body>');
-   html=pos>=0?html.slice(0,pos)+tag+html.slice(pos):html+tag;
+ if(!html.includes('pinkcalc-pedidos.js')){
+   html=html.includes('</body>')?html.slice(0,html.toLowerCase().lastIndexOf('</body>'))+tag+html.slice(html.toLowerCase().lastIndexOf('</body>')):html+tag;
  }
  const headers=new Headers(response.headers);
  headers.delete('content-length');headers.delete('content-encoding');headers.set('content-type','text/html; charset=utf-8');

@@ -1,26 +1,12 @@
-PINKCALC V8 - LISTO PARA SUBIR A GITHUB
+PINKCALC V10 - BAUCHERS Y ESTADOS DE CUENTA ILUSTRADOS
 
-Este paquete contiene solamente DOS archivos:
-  pinkcalc-pedidos.js
-  sw.js
+1. Hacé un respaldo JSON desde PinkCalc antes de actualizar.
+2. Extraé el ZIP.
+3. Subí solamente sw.js y pinkcalc-comprobantes.js a la raíz del repositorio GitHub.
+4. Confirmá Commit changes.
+5. Abrí PinkCalc con internet, cerrá y volvé a abrir. Puede requerir dos aperturas.
 
-No tenes que editar index.html. El nuevo sw.js se encarga de cargar
-pinkcalc-pedidos.js al abrir PinkCalc una vez activada la actualizacion.
-
-PASOS EN SAMSUNG:
-1. Primero entra a PinkCalc > Reportes > Exportar respaldo. Guarda el JSON.
-2. Extrae este ZIP (no subas el ZIP como un solo archivo).
-3. En tu repositorio mi-calculadora-shein, toca Add file > Upload files.
-4. Selecciona AMBOS archivos de este ZIP. Si GitHub pregunta por
-   reemplazar sw.js y pinkcalc-pedidos.js, confirma el reemplazo.
-5. Toca Commit changes.
-6. Abre PinkCalc con internet, cierra y vuelve a abrirla.
-   Puede ser necesario abrirla una segunda vez para que el nuevo
-   service worker tome el control.
-7. En Productos guardados busca la nueva opcion para asignar a cliente.
-
-IMPORTANTE: NO BORRES index.html, ni borres datos del navegador,
-ni desinstales PinkCalc. Los clientes y abonos se guardan en el
-almacenamiento local del celular. La copia JSON es tu seguridad.
-
-Si GitHub muestra algun error o la funcion no aparece, manda captura.
+No borres index.html, pinkcalc-pedidos.js ni pinkcalc-factura-plantilla.jpg.
+No desinstalés PinkCalc ni borres los datos del navegador.
+Esta versión cambia la presentación de estados de cuenta, bauchers y abonos; no modifica los registros guardados.
+La plantilla de la factura existente sigue siendo necesaria y debe permanecer en GitHub.

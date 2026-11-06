@@ -1,0 +1,26 @@
+PINKCALC V8 - LISTO PARA SUBIR A GITHUB
+
+Este paquete contiene solamente DOS archivos:
+  pinkcalc-pedidos.js
+  sw.js
+
+No tenes que editar index.html. El nuevo sw.js se encarga de cargar
+pinkcalc-pedidos.js al abrir PinkCalc una vez activada la actualizacion.
+
+PASOS EN SAMSUNG:
+1. Primero entra a PinkCalc > Reportes > Exportar respaldo. Guarda el JSON.
+2. Extrae este ZIP (no subas el ZIP como un solo archivo).
+3. En tu repositorio mi-calculadora-shein, toca Add file > Upload files.
+4. Selecciona AMBOS archivos de este ZIP. Si GitHub pregunta por
+   reemplazar sw.js y pinkcalc-pedidos.js, confirma el reemplazo.
+5. Toca Commit changes.
+6. Abre PinkCalc con internet, cierra y vuelve a abrirla.
+   Puede ser necesario abrirla una segunda vez para que el nuevo
+   service worker tome el control.
+7. En Productos guardados busca la nueva opcion para asignar a cliente.
+
+IMPORTANTE: NO BORRES index.html, ni borres datos del navegador,
+ni desinstales PinkCalc. Los clientes y abonos se guardan en el
+almacenamiento local del celular. La copia JSON es tu seguridad.
+
+Si GitHub muestra algun error o la funcion no aparece, manda captura.

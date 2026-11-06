@@ -1,9 +1,12 @@
-PINKCALC NUEVA VERSION - 31/10/2026
+PINKCALC - CORRECCION DE CODIGO VISIBLE EN LA PANTALLA
 
-1. ANTES DE ACTUALIZAR: Abrí tu PinkCalc instalada y exportá un respaldo. Guardalo fuera de la app.
-2. Extraé este ZIP. En GitHub, repositorio mi-calculadora-shein, subí TODOS los archivos sueltos (no el ZIP), confirmá cambios.
-3. No desinstalés PinkCalc ni borres datos del navegador. Esperá la publicación de GitHub Pages y abrí tu app instalada.
-4. CATÁLOGO: desde PinkCalc > Catálogo digital, seleccioná productos y descargá catalogo.json. Subí ese nuevo catalogo.json al repositorio reemplazando el de ejemplo. Compartí https://cuadradaleska2-blip.github.io/mi-calculadora-shein/catalogo.html
-5. Cada vez que cambiés los productos publicados, descargá y volvé a subir catalogo.json. Los pedidos se reciben por WhatsApp; no se sincronizan automáticamente en la app.
-6. La pulpería mantiene inventario, ventas y fiados en el dispositivo. Exportá respaldos periódicamente.
-7. Este paquete es una actualización de la versión de cuentas y abonos ilimitados.
+1. Conserva PinkCalc instalada y NO borres datos del navegador.
+2. Extrae este ZIP.
+3. En GitHub, reemplaza SOLAMENTE el archivo sw.js con el sw.js de este paquete.
+4. Confirma Commit changes.
+5. Abre PinkCalc con internet, cerrala completamente y abre de nuevo. Repite una segunda vez si hace falta.
+6. La pantalla debe verse normal, sin codigo de programacion debajo.
+
+El problema era que el service worker anterior insertaba la etiqueta del modulo en el primer texto '</body>', que estaba dentro del codigo de index.html, en vez del cierre real de la pagina.
+
+Este archivo usa el ultimo cierre real y conserva el resto de la aplicacion. Los datos del usuario no se borran.

@@ -1,0 +1,17 @@
+PINKCALC 2.0 — PAQUETE DE PRUEBA
+
+ARCHIVOS
+- pinkcalc-2-prueba.html: versión de prueba que ya publicaste en GitHub.
+- respaldo-pinkcalc-completo.json: copia de tus datos originales; guárdala en privado.
+
+IMPORTANTE
+- NO reemplaces index.html todavía. La versión de prueba NO ha sido verificada como compatible con el almacenamiento de tu PinkCalc original.
+- NO subas respaldo-pinkcalc-completo.json a GitHub: contiene datos privados y fotografías de tus productos.
+- NO borres la aplicación instalada ni los datos de Chrome.
+- La actualización definitiva de index.html sigue pendiente de desarrollo y validación.
+
+REPOSITORIO
+https://github.com/cuadradaleska2-blip/mi-calculadora-shein
+
+PRUEBA EN GITHUB PAGES
+https://cuadradaleska2-blip.github.io/mi-calculadora-shein/pinkcalc-2-prueba.html
